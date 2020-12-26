@@ -2,9 +2,10 @@
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix doap: <http://usefulinc.com/ns/doap#> .
 
-<https://fps.io/plugins/clipping.tanh> a lv2:Plugin ;
+<http://fps.io/plugins/clipping.tanh> a lv2:Plugin ;
   doap:name "clipping.tanh";
   doap:license <http://usefulinc.com/doap/licenses/gpl> ;
+  doap:description "Implements the function output = post-gain * tanh((input_gain * input) + bias)" ;
   lv2:binary <tanh.so> ;
   lv2:optionalFeature lv2:hardRTCapable ;
   lv2:port [
@@ -12,10 +13,10 @@
     a lv2:ControlPort ;
     lv2:index 0 ;
     lv2:symbol "pregain" ;
-    lv2:name "Pre-Gain";
+    lv2:name "Pre-Gain (dB)";
     lv2:default 0.0 ;
-    lv2:minimum 0.0 ;
-    lv2:maximum 10.0 ;
+    lv2:minimum -96.0 ;
+    lv2:maximum 96.0 ;
   ] , [
     a lv2:InputPort ;
     a lv2:ControlPort ;
@@ -42,8 +43,8 @@
     a lv2:ControlPort ;
     lv2:index 4 ;
     lv2:symbol "postgain" ;
-    lv2:name "Post-Gain";
-    lv2:default 0.0 ;
-    lv2:minimum 0.0 ;
-    lv2:maximum 10.0 ;
+    lv2:name "Post-Gain (dB)";
+    lv2:default 1.0 ;
+    lv2:minimum -96.0 ;
+    lv2:maximum 96.0 ;
   ] .

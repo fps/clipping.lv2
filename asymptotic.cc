@@ -6,42 +6,44 @@ inline float db_to_gain( float x)
     return pow(10, x/20.0);
 }
 
-struct clipping_tanh {
+struct clipping_asymptotic {
     float *ports[5];
 };
 
 LV2_Handle instantiate(const LV2_Descriptor *descriptor, double sample_rate, const char *bundle_path, const LV2_Feature *const *features)
 {
-    return (LV2_Handle)(new clipping_tanh);
+    return (LV2_Handle)(new clipping_asymptotic);
 }
 
 void cleanup(LV2_Handle instance)
 {
-    delete ((clipping_tanh*)instance);
+    delete ((clipping_asymptotic*)instance);
 }
 
 void connect_port(LV2_Handle instance, uint32_t port, void *data_location)
 {
-    ((clipping_tanh*)instance)->ports[port] = (float*)data_location;
+    ((clipping_asymptotic*)instance)->ports[port] = (float*)data_location;
 }
 
 void run(LV2_Handle instance, uint32_t sample_count)
 {
-    clipping_tanh *tinstance = (clipping_tanh*)(instance);
+    clipping_asymptotic *tinstance = (clipping_asymptotic*)(instance);
 
     const float pregain = db_to_gain(tinstance->ports[0][0]);
-    const float bias = tinstance->ports[1][0];
-    const float postgain = db_to_gain(tinstance->ports[4][0]);
+    const float normalizing_constant = tinstance->ports[1][0];
+    const float bias = tinstance->ports[2][0];
+    const float postgain = db_to_gain(tinstance->ports[5][0]);
     
     for(uint32_t sample_index = 0; sample_index < sample_count; ++sample_index)
     {
-        tinstance->ports[3][sample_index] = 
-            postgain * tanh((pregain * tinstance->ports[2][sample_index]) + bias);
+        const float in = bias + pregain * tinstance->ports[3][sample_index];
+        tinstance->ports[4][sample_index] = 
+            postgain * in / (fabs(in) + normalizing_constant);
     }
 }
 
 LV2_Descriptor descriptor = {
-    "http://fps.io/plugins/clipping.tanh",
+    "http://fps.io/plugins/clipping.asymptotic",
     instantiate,
     connect_port,
     nullptr, // activate

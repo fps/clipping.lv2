@@ -12,26 +12,14 @@
     a lv2:ControlPort ;
     lv2:index 0 ;
     lv2:symbol "pregain" ;
-    lv2:name "Pre-Gain";
+    lv2:name "Pre-Gain (dB)";
     lv2:default 0.0 ;
-    lv2:minimum 0.0 ;
-    lv2:maximum 10.0 ;
-  ] , [
-    a lv2:AudioPort ;
-    a lv2:InputPort ;
-    lv2:index 1 ;
-    lv2:symbol "in" ;
-    lv2:name "In"
-  ] , [
-    a lv2:AudioPort ;
-    a lv2:OutputPort ;
-    lv2:index 2 ;
-    lv2:symbol "out" ;
-    lv2:name "Out"
+    lv2:minimum -96.0 ;
+    lv2:maximum 96.0 ;
   ] , [
     a lv2:InputPort ;
     a lv2:ControlPort ;
-    lv2:index 3 ;
+    lv2:index 1 ;
     lv2:symbol "constant" ;
     lv2:name "Normalizing constant";
     lv2:default 1.0 ;
@@ -40,10 +28,31 @@
   ] , [
     a lv2:InputPort ;
     a lv2:ControlPort ;
-    lv2:index 4 ;
-    lv2:symbol "postgain" ;
-    lv2:name "Post-Gain";
+    lv2:index 2 ;
+    lv2:symbol "bias" ;
+    lv2:name "Bias";
     lv2:default 0.0 ;
-    lv2:minimum 0.0 ;
-    lv2:maximum 10.0 ;
+    lv2:minimum -1.0 ;
+    lv2:maximum 1.0 ;
+  ] , [
+    a lv2:AudioPort ;
+    a lv2:InputPort ;
+    lv2:index 3 ;
+    lv2:symbol "in" ;
+    lv2:name "In"
+  ] , [
+    a lv2:AudioPort ;
+    a lv2:OutputPort ;
+    lv2:index 4 ;
+    lv2:symbol "out" ;
+    lv2:name "Out"
+  ] , [
+    a lv2:InputPort ;
+    a lv2:ControlPort ;
+    lv2:index 5 ;
+    lv2:symbol "postgain" ;
+    lv2:name "Post-Gain (dB)";
+    lv2:default 0.0 ;
+    lv2:minimum -96.0 ;
+    lv2:maximum 96.0 ;
   ] .

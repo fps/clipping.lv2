@@ -3,13 +3,11 @@
 
 <http://fps.io/plugins/clipping.tanh>
     a lv2:Plugin ;
-#    lv2:binary <tanh.so>  ;
     rdfs:seeAlso <tanh.ttl> .
 
-#<http://fps.io/plugins/clipping.asymptotic>
-#    a lv2:Plugin ;
-#    lv2:binary <asymptotic.so>  ;
-#    rdfs:seeAlso <asymptotic.ttl> .
+<http://fps.io/plugins/clipping.asymptotic>
+    a lv2:Plugin ;
+    rdfs:seeAlso <asymptotic.ttl> .
 #
 #<http://fps.io/plugins/clipping.hard>
 #    a lv2:Plugin ;
