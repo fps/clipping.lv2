@@ -7,7 +7,7 @@ inline float db_to_gain( float x)
 }
 
 struct clipping_asymptotic {
-    float *ports[5];
+    float *ports[6];
 };
 
 LV2_Handle instantiate(const LV2_Descriptor *descriptor, double sample_rate, const char *bundle_path, const LV2_Feature *const *features)

@@ -2,7 +2,7 @@
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix doap: <http://usefulinc.com/ns/doap#> .
 
-<https://fps.io/plugins/clipping.asymptotic> a lv2:Plugin ;
+<http://fps.io/plugins/clipping.asymptotic> a lv2:Plugin ;
   doap:name "clipping.asymptotic";
   doap:license <http://usefulinc.com/doap/licenses/gpl> ;
   lv2:binary <asymptotic.so> ;
