@@ -29,15 +29,15 @@ void run(LV2_Handle instance, uint32_t sample_count)
 {
     clipping_asymptotic *tinstance = (clipping_asymptotic*)(instance);
 
-    const float pregain = db_to_gain(tinstance->ports[0][0]);
-    const float normalizing_constant = tinstance->ports[1][0];
-    const float bias = tinstance->ports[2][0];
+    const float pregain = db_to_gain(tinstance->ports[2][0]);
+    const float normalizing_constant = tinstance->ports[3][0];
+    const float bias = tinstance->ports[4][0];
     const float postgain = db_to_gain(tinstance->ports[5][0]);
     
     for(uint32_t sample_index = 0; sample_index < sample_count; ++sample_index)
     {
-        const float in = bias + pregain * tinstance->ports[3][sample_index];
-        tinstance->ports[4][sample_index] = 
+        const float in = bias + pregain * tinstance->ports[0][sample_index];
+        tinstance->ports[1][sample_index] = 
             postgain * in / (fabs(in) + normalizing_constant);
     }
 }
