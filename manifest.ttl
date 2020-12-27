@@ -8,10 +8,9 @@
 <http://fps.io/plugins/clipping.asymptotic>
     a lv2:Plugin ;
     rdfs:seeAlso <asymptotic.ttl> .
-#
-#<http://fps.io/plugins/clipping.hard>
-#    a lv2:Plugin ;
-#    lv2:binary <hard.so>  ;
-#    rdfs:seeAlso <hard.ttl> .
+
+<http://fps.io/plugins/clipping.hard>
+    a lv2:Plugin ;
+    rdfs:seeAlso <hard.ttl> .
 
 

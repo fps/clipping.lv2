@@ -37,6 +37,7 @@ void run(LV2_Handle instance, uint32_t sample_count)
     for(uint32_t sample_index = 0; sample_index < sample_count; ++sample_index)
     {
         const float in = (pregain * tinstance->ports[0][sample_index]) + bias;
+        
         tinstance->ports[1][sample_index] = 
             postgain * (fabs(in) > threshold ? threshold : in);
     }
