@@ -2,7 +2,7 @@
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix doap: <http://usefulinc.com/ns/doap#> .
 
-<https://fps.io/plugins/clipping.hard> a lv2:Plugin ;
+<http://fps.io/plugins/clipping.hard> a lv2:Plugin ;
   doap:name "clipping.hard";
   doap:license <http://usefulinc.com/doap/licenses/gpl> ;
   lv2:binary <hard.so> ;
@@ -55,4 +55,13 @@
     lv2:default 0.0 ;
     lv2:minimum -96.0 ;
     lv2:maximum 96.0 ;
+  ] , [
+    a lv2:InputPort ;
+    a lv2:ControlPort ;
+    lv2:index 6 ;
+    lv2:symbol "drywet" ;
+    lv2:name "Dry/Wet";
+    lv2:default 0.5 ;
+    lv2:minimum 0.0 ;
+    lv2:maximum 1.0 ;
   ] .

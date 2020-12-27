@@ -13,4 +13,11 @@
     a lv2:Plugin ;
     rdfs:seeAlso <hard.ttl> .
 
+<http://fps.io/plugins/clipping.emalp>
+    a lv2:Plugin ;
+    rdfs:seeAlso <emalp.ttl> .
+
+<http://fps.io/plugins/clipping.emahp>
+    a lv2:Plugin ;
+    rdfs:seeAlso <emahp.ttl> .
 

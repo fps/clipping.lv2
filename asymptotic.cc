@@ -7,7 +7,7 @@ inline float db_to_gain( float x)
 }
 
 struct clipping_asymptotic {
-    float *ports[6];
+    float *ports[7];
 };
 
 LV2_Handle instantiate(const LV2_Descriptor *descriptor, double sample_rate, const char *bundle_path, const LV2_Feature *const *features)
@@ -33,12 +33,16 @@ void run(LV2_Handle instance, uint32_t sample_count)
     const float normalizing_constant = tinstance->ports[3][0];
     const float bias = tinstance->ports[4][0];
     const float postgain = db_to_gain(tinstance->ports[5][0]);
+    const float wet = tinstance->ports[6][0];
+    const float dry = 1.0 - wet;
     
     for(uint32_t sample_index = 0; sample_index < sample_count; ++sample_index)
     {
-        const float in = bias + pregain * tinstance->ports[0][sample_index];
-        tinstance->ports[1][sample_index] = 
-            postgain * in / (fabs(in) + normalizing_constant);
+        const float in = tinstance->ports[0][sample_index];
+        const float in2 = bias + pregain * in;
+        
+        tinstance->ports[1][sample_index] = dry * in + 
+            postgain * in2 / (fabs(in2) + normalizing_constant);
     }
 }
 
