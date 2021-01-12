@@ -5,7 +5,7 @@
 <http://fps.io/plugins/clipping.tanh> a lv2:Plugin ;
   doap:name "clipping.tanh";
   doap:license <http://usefulinc.com/doap/licenses/gpl> ;
-  doap:description "Implements the function output = post-gain * tanh((input_gain * input) + bias)" ;
+  doap:description "Implements the function output = post-gain * tanh(input_gain * (input + bias))" ;
   lv2:binary <tanh.so> ;
   lv2:optionalFeature lv2:hardRTCapable ;
   lv2:port [
