@@ -42,7 +42,7 @@ void run(LV2_Handle instance, uint32_t sample_count)
         const float in2 = bias + pregain * in;
         
         tinstance->ports[1][sample_index] = dry * in + 
-            postgain * in2 / (fabs(in2) + normalizing_constant);
+            wet * postgain * in2 / (fabs(in2) + normalizing_constant);
     }
 }
 
