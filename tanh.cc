@@ -1,10 +1,7 @@
 #include <cmath>
 #include <lv2.h>
 
-static inline float db_to_gain( float x) 
-{
-    return powf(10.0f, 0.05f * x);
-}
+#include "common.cc"
 
 struct clipping_tanh {
     float *ports[6];
