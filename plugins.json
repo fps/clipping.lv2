@@ -1,5 +1,5 @@
 {
-  "uri": "https://fps.io/plugins/clipping.${name}.${channels}-channels.${oversample}x-oversample.${version}",
+  "uri": "https://fps.io/plugins/clipping.${name}.${channels}-channels.${oversample}x-oversample.v${version}",
   "name": "clipping.${name}.${version}",
   "license": "http://usefulinc.com/doap/licenses/gpl",
   "description": "${description}",

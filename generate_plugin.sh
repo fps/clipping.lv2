@@ -33,8 +33,16 @@ echo
 
 echo Generating plugin specific ttl: ${OUTPUT}.ttl
 
-uri=$(cat ${INPUT} | jq .\"uri\" | sed -e 's/${name}/'"${NAME}/g")
-echo ${uri}
+uri=$(cat ${INPUT} | jq -r  .\"uri\" | sed -e 's/${name}/'"${NAME}/g" | sed -e 's/${oversample}/'"${OVERSAMPLE}/g" | sed -e 's/${channels}/'"${CHANNELS}/g" | sed -e 's/${version}/'"${VERSION}/g")
+
+echo URI: ${uri}
+
+echo '@prefix lv2:  <http://lv2plug.in/ns/lv2core#> .' > ${OUTPUT}.ttl
+echo '@prefix foaf: <http://xmlns.com/foaf/0.1/> .' >> ${OUTPUT}.ttl
+echo '@prefix doap: <http://usefulinc.com/ns/doap#> .' >> ${OUTPUT}.ttl
+echo " " >> ${OUTPUT}.ttl
+echo "<${uri}> a lv2:Plugin ;" >> ${OUTPUT}.ttl
+
 
 
 echo Generating bundle manifest snippet: ${OUTPUT}_manifest.ttl
