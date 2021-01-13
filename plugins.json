@@ -1,5 +1,5 @@
 {
-  "uri": "https://fps.io/plugins/clipping.${name}.${version}",
+  "uri": "https://fps.io/plugins/clipping.${name}.${channels}-channels.${oversample}x-oversample.${version}",
   "name": "clipping.${name}.${version}",
   "license": "http://usefulinc.com/doap/licenses/gpl",
   "description": "${description}",
@@ -44,7 +44,7 @@
     },
     {
       "a": [ "lv2:Inputport", "lv2:ControlPort" ],
-      "symbol": "srywet",
+      "symbol": "drywet",
       "name": "Dry / Wet",
       "default": 0.0,
       "minimum": 0.5,
