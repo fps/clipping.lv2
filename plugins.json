@@ -1,0 +1,55 @@
+{
+  "uri": "https://fps.io/plugins/clipping.${name}.${version}",
+  "name": "clipping.${name}.${version}",
+  "license": "http://usefulinc.com/doap/licenses/gpl",
+  "description": "${description}",
+  "author": "Florian Paul Schmidt",
+  "author-email": "mista.tapas@gmx.net",
+  "multi-channel-ports": [
+    { 
+      "a": [ "lv2:AudioPort", "lv2:InputPort" ],
+      "symbol": "in${channel}",
+      "name": "in${channel}"
+    },
+    { 
+      "a": [ "lv2:AudioPort", "lv2:OuputPort" ],
+      "symbol": "out${channel}",
+      "name": "out${channel}"
+    }
+  ],
+  "ports": [
+    {
+      "a": [ "lv2:Inputport", "lv2:ControlPort" ],
+      "symbol": "pregain",
+      "name": "Pre-Gain (dB)",
+      "default": 0.0,
+      "minimum": -96.0,
+      "maximum": 96.0
+    },
+    {
+      "a": [ "lv2:Inputport", "lv2:ControlPort" ],
+      "symbol": "bias",
+      "name": "Bias",
+      "default": 0.0,
+      "minimum": -1.0,
+      "maximum": 1.0
+    },
+    {
+      "a": [ "lv2:Inputport", "lv2:ControlPort" ],
+      "symbol": "postgain",
+      "name": "Post-Gain",
+      "default": 0.0,
+      "minimum": -96.0,
+      "maximum": 96.0
+    },
+    {
+      "a": [ "lv2:Inputport", "lv2:ControlPort" ],
+      "symbol": "srywet",
+      "name": "Dry / Wet",
+      "default": 0.0,
+      "minimum": 0.5,
+      "maximum": 1.0
+    }
+  ],
+  "process-function-body": "${name}_process.cc"
+}
