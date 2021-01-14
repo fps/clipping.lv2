@@ -1,6 +1,6 @@
 {
   "uri": "https://fps.io/plugins/clipping.${name}.${channels}-channels.${oversample}x-oversample.v${version}",
-  "name": "clipping.${name}.${version}",
+  "name": "clipping.${name}.${channels}-channels.${oversample}x-oversample.v${version}",
   "license": "http://usefulinc.com/doap/licenses/gpl",
   "description": "${description}",
   "author": "Florian Paul Schmidt",
@@ -19,7 +19,7 @@
   ],
   "ports": [
     {
-      "a": [ "lv2:Inputport", "lv2:ControlPort" ],
+      "a": [ "lv2:InputPort", "lv2:ControlPort" ],
       "symbol": "pregain",
       "name": "Pre-Gain (dB)",
       "default": 0.0,
@@ -27,7 +27,7 @@
       "maximum": 96.0
     },
     {
-      "a": [ "lv2:Inputport", "lv2:ControlPort" ],
+      "a": [ "lv2:InputPort", "lv2:ControlPort" ],
       "symbol": "bias",
       "name": "Bias",
       "default": 0.0,
@@ -35,7 +35,7 @@
       "maximum": 1.0
     },
     {
-      "a": [ "lv2:Inputport", "lv2:ControlPort" ],
+      "a": [ "lv2:InputPort", "lv2:ControlPort" ],
       "symbol": "postgain",
       "name": "Post-Gain",
       "default": 0.0,
@@ -43,7 +43,7 @@
       "maximum": 96.0
     },
     {
-      "a": [ "lv2:Inputport", "lv2:ControlPort" ],
+      "a": [ "lv2:InputPort", "lv2:ControlPort" ],
       "symbol": "drywet",
       "name": "Dry / Wet",
       "default": 0.0,
