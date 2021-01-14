@@ -6,7 +6,7 @@ option_parser.add_option("-i", "--input", dest="input", help="A JSON file contai
 option_parser.add_option("-x", "--oversampling-factor", dest="oversample", help="The oversampling factor used. Default: %default", default="1")
 option_parser.add_option("-c", "--channels", dest="channels", help="The audio input/output channels count. Default: %default", default="1")
 option_parser.add_option("-s", "--smooth-control-parameters-cutoff", help="The normalized radians/sec cutoff frequency for the control parameter smoothing lowpass. Default: %default", default="0.1")
-option_parser.add_option("-n", "--name", dest="name", help="The plugin name. Default: %default", default="name")
+option_parser.add_option("-n", "--name", dest="name", help="The specific plugin name. Default: %default", default="name")
 option_parser.add_option("-v", "--version", dest="version", help="The plugin version. Default: %default", default="1")
 option_parser.add_option("-o", "--output", dest="output", help="The output file base name. Default: %default", default="output.${name}.c${channels}.o${oversample}.v${version}")
 option_parser.add_option("-d", "--description", dest="description", help="The description. Default: %default", default="A plugin")
