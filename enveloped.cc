@@ -5,14 +5,20 @@
 
 struct clipping_enveloped {
     float *ports[6];
-    float s;
+    float buffer[128];
+    int buffer_position;
     double samplerate;
 
     clipping_enveloped(double samplerate) 
         : 
-            s(0), 
+            buffer_position(0), 
             samplerate(samplerate) 
-        { }
+        { 
+            for (int index = 0; index < 128; ++index)
+            {
+                buffer[index] = 0;
+            }
+        }
 };
 
 static LV2_Handle instantiate(const LV2_Descriptor *descriptor, double sample_rate, const char *bundle_path, const LV2_Feature *const *features)
@@ -35,23 +41,27 @@ static void run(LV2_Handle instance, uint32_t sample_count)
     clipping_enveloped *tinstance = (clipping_enveloped*)(instance);
 
     const float envgain = db_to_gain(tinstance->ports[2][0]);
-    const float tau = tinstance->ports[3][0];
+    const int window_size = (int)(tinstance->ports[3][0]);
     const float postgain = db_to_gain(tinstance->ports[4][0]);
     const float wet = tinstance->ports[5][0];
     const float dry = 1.0 - wet;
 
-    const float a = exp(-(1.0f/tinstance->samplerate) / tau);
-    
     for(uint32_t sample_index = 0; sample_index < sample_count; ++sample_index)
     {
         const float in = tinstance->ports[0][sample_index];
+        tinstance->buffer[tinstance->buffer_position] = in;
+
+        float env = 0;
+        for (int index = 0; index < window_size; ++index) 
+            { env += fabs(tinstance->buffer[index] / (float)window_size); }
 
         const float in2 = in > 0 ? 1 : -1;
         
-        tinstance->s = a * tinstance->s + (1 - a) * fabs(in);
-
         tinstance->ports[1][sample_index] = dry * in +
-            wet * postgain * tanhf(envgain * tinstance->s) * in2;
+            wet * postgain * tanhf(envgain * env) * in2;
+
+        ++(tinstance->buffer_position);
+        tinstance->buffer_position %= window_size;
     }
 }
 
