@@ -39,7 +39,7 @@ static void run(LV2_Handle instance, uint32_t sample_count)
         const float in2 = (pregain * in) + bias;
         
         tinstance->ports[1][sample_index] = dry * in + 
-            wet * postgain * (fabs(in2) > threshold ? threshold : in2);
+            wet * postgain * (fabs(in2) > threshold ? copysignf(1.0, in2) * threshold : in2);
     }
 }
 
