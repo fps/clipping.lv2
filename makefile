@@ -1,10 +1,13 @@
 
 .PHONY: clean all
 
-all: tanh.so asymptotic.so hard.so
+all: tanh.so asymptotic.so hard.so enveloped.so
 
 clean:
-	rm -f tanh.so asymptotic.so hard.so
+	rm -f tanh.so asymptotic.so hard.so enveloped.so
+
+enveloped.so: enveloped.cc common.cc
+	g++ -O3 -ffast-math $(CXXFLAGS) -Wall -o enveloped.so -shared  enveloped.cc
 
 tanh.so: tanh.cc common.cc
 	g++ -O3 -ffast-math $(CXXFLAGS) -Wall -o tanh.so -shared  tanh.cc
