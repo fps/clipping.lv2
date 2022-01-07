@@ -6,7 +6,7 @@
   doap:name "clipping.enveloped";
   doap:license <http://usefulinc.com/doap/licenses/gpl> ;
   doap:description "Implements the function output = postgain * tanh(envgain * envelope) * (input > 0 ? -1 : 1)). Where envelope is an exponential filtered envelope of abs(signal)." ;
-  lv2:binary <tanh.so> ;
+  lv2:binary <enveloped.so> ;
   lv2:optionalFeature lv2:hardRTCapable ;
   lv2:port [
     a lv2:AudioPort ;

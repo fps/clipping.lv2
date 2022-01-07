@@ -49,7 +49,7 @@ static void run(LV2_Handle instance, uint32_t sample_count)
 }
 
 static const LV2_Descriptor descriptor = {
-    "http://fps.io/plugins/clipping.ennveloped",
+    "http://fps.io/plugins/clipping.enveloped",
     instantiate,
     connect_port,
     nullptr, // activate
