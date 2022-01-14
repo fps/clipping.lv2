@@ -31,12 +31,25 @@ static void run(LV2_Handle instance, uint32_t sample_count)
     const float postgain = db_to_gain(tinstance->ports[4][0]);
     const float wet = tinstance->ports[5][0];
     const float dry = 1.0 - wet;
+
+    float in_buffer[4] = { 0, 0, 0, 0};
+    float out_buffer[4] = { 0, 0, 0, 0 };
     
     for(uint32_t sample_index = 0; sample_index < sample_count; ++sample_index)
     {
         const float in = tinstance->ports[0][sample_index];
         const float in2 = bias + pregain * in;
         
+        in_buffer[0] = in;
+
+        for (size_t oversample_index = 0; oversample_index < 4; ++oversample_index)
+        {
+            for (size_t biquad_index = 0; biquad_index < 5; ++biquad_index)
+            {
+
+            }
+        }
+
         tinstance->ports[1][sample_index] = dry * in +
             wet * postgain * tanhf(in2);
     }
