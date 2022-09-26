@@ -39,9 +39,6 @@ static void run(LV2_Handle instance, uint32_t sample_count)
     const float wet = tinstance->ports[5][0];
     const float dry = 1.0 - wet;
 
-    float in_buffer[4] = { 0, 0, 0, 0};
-    float out_buffer[4] = { 0, 0, 0, 0 };
-    
     for(uint32_t sample_index = 0; sample_index < sample_count; ++sample_index)
     {
         const float in = tinstance->ports[0][sample_index];
