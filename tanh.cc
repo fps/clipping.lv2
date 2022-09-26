@@ -2,14 +2,21 @@
 #include <lv2.h>
 
 #include "common.cc"
+#include "oversampling.h"
+#include "cascaded_biquad/cascaded_biquad.h"
 
 struct clipping_tanh {
     float *ports[6];
+    float *in_filter_state;
+    float *out_filter_state;
 };
 
 static LV2_Handle instantiate(const LV2_Descriptor *descriptor, double sample_rate, const char *bundle_path, const LV2_Feature *const *features)
 {
-    return (LV2_Handle)(new clipping_tanh);
+    clipping_tanh *instance = new clipping_tanh;
+    instance->in_filter_state = cascaded_biquad::state<6, float>();
+    instance->out_filter_state = cascaded_biquad::state<6, float>();
+    return (LV2_Handle)(instance);
 }
 
 static void cleanup(LV2_Handle instance)
@@ -37,8 +44,20 @@ static void run(LV2_Handle instance, uint32_t sample_count)
         const float in = tinstance->ports[0][sample_index];
         const float in2 = bias + pregain * in;
         
+        float out = 0;
+        for (int index = 0; index < 4; ++index) 
+        {
+          const float intermediate = index == 0 ? in2 : 0;
+
+          const float in_filtered = cascaded_biquad::process<6, float, float, float>(clipping_oversampling_filter_coefficients, tinstance->in_filter_state, clipping_oversampling_filter_gain, intermediate);
+          const float clipped = tanhf(in_filtered);
+          const float out_filtered = cascaded_biquad::process<6, float, float, float>(clipping_oversampling_filter_coefficients, tinstance->out_filter_state, clipping_oversampling_filter_gain, clipped);
+
+          if (index == 0) out = out_filtered;
+        }
+
         tinstance->ports[1][sample_index] = dry * in +
-            wet * postgain * tanhf(in2);
+            wet * postgain * out;
     }
 }
 
