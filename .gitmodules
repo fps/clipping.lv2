@@ -1,0 +1,6 @@
+[submodule "cascaded_biquad"]
+	path = cascaded_biquad
+	url = https://github.com/fps/cascaded_biquad.git
+[submodule "state-variable-filter"]
+	path = state-variable-filter
+	url = https://github.com/fps/state-variable-filter.git
